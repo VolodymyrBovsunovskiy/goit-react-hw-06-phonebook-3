@@ -1,10 +1,11 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
+import { setFilter } from './redux/filterSlice';
 import { Label } from './Filter.styled';
 
 function Filter() {
   const dispatch = useDispatch();
-  const handlerChangeFilter = e => {
+  const handleChangeFilter = e => {
     dispatch(setFilter(e.target.value.toLowerCase().trim()));
   };
   return (
@@ -14,7 +15,7 @@ function Filter() {
         id="filter"
         type="text"
         name="filter"
-        onChange={handlerChangeFilter}
+        onChange={handleChangeFilter}
       />
     </>
   );

@@ -1,13 +1,15 @@
+import React from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from './ContactForm.styled';
 import { addContact } from '../../redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+import { getContacts } from '../../redux/selectors';
 
 function ContactForm() {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  const handlerSubmit = e => {
+
+  const handleSubmit = e => {
     e.preventDefault();
 
     const name = e.target.elements.name.value;
@@ -16,18 +18,20 @@ function ContactForm() {
       e.target.reset();
       return;
     }
+
     const number = e.target.elements.number.value;
     const newContact = {
       id: nanoid(),
       name,
       number,
     };
+
     dispatch(addContact(newContact));
     e.target.reset();
   };
 
   return (
-    <Form onSubmit={handlerSubmit}>
+    <Form onSubmit={handleSubmit}>
       <label htmlFor="name">Name </label>
       <input
         id="name"
@@ -47,7 +51,9 @@ function ContactForm() {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
+
       <br />
+
       <button type="submit">Add contact</button>
     </Form>
   );
